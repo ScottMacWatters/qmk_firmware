@@ -139,7 +139,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case PW_APPLE234:
         if (record->event.pressed) {
-            SEND_STRING("Apple*234");
+            SEND_STRING("Apple*234\n");
         }
         break;
 
