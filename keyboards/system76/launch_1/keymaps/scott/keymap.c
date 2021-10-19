@@ -29,6 +29,8 @@ enum custom_keycodes {
     PW_APPLE123,
     PW_APPLE234,
     SC_111111,
+    SMACWATTERS,
+    LOCK
 
 
 };
@@ -148,6 +150,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING("111111");
         }
         break;
+
+    case SMACWATTERS:
+        if (record->event.pressed) {
+            SEND_STRING("smacwatters+@apple.com" SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) 
+                SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) 
+                SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) 
+                SS_TAP(X_LEFT));
+        }
+        break;
+
+    case LOCK:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LGUI(SS_LCTL("q"))); // cmd ctrl q 
+        }
+        break;
     }
     return true;
 };
@@ -196,7 +213,7 @@ ________________________________________________________________________________
 |        |        |        |        |        |        |        |        |        |        | TOGGLE |  DOWN  |  UP    |            ||   UP   |
 |________|________|________|________|________|________|________|________|________|________|________|________|________|____________||________|
 |            |        |        |        |        |        |        |        |        |        |        |        |        |        ||   BRI  |
-|            |        |        |        |        |        |        |        |        |        |        |        |        |        ||   DOWN |
+|            |   LOCK |        |        |        |        |        |        |        |        |        |        |        |        ||   DOWN |
 |____________|________|________|________|________|________|________|________|________|________|________|________|________|________||________|
   |            |        |        |        |        |        |        |        |        |        |        |        |            |   |        |
   |            |        |        |        |        |        |  LEFT  |  DOWN  |   UP   | RIGHT  |        |        |            |   |        |
@@ -215,7 +232,7 @@ ________________________________________________________________________________
   [1] = LAYOUT(
     RESET,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, RGB_TOG, RGB_VAD, RGB_VAI, KC_NO,     KC_BRIU,
-        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_BRID,
+        KC_NO, LOCK, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_BRID,
           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_NO, KC_NO,    KC_NO,     KC_NO,
               KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_MUTE, KC_NO, KC_NO, KC_NO,   KC_NO,  KC_VOLU,
           KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,          KC_MPLY,      KC_NO, KC_NO, KC_NO,       KC_HOME,  KC_VOLD, KC_END
@@ -224,11 +241,11 @@ ________________________________________________________________________________
 
     /* Layer 2, Macro layer
 __________________________________________________________________________________________________________________________________  ________
-| DEBUG  |        |        |        |        |        |        |        |        |        |        |        |        |            || DEBUG  |
-| STOP   |  PW123 |  PW234 |        |        |        |        |        |        |        |        |        |        |  SAFE_DEL  ||CURRENT |
+|        |        |        |        |        |        |        |        |        |        |        |        |        |            || DEBUG  |
+|        |  PW123 |  PW234 |        |        |        |        |        |        |        |        |        |        |  SAFE_DEL  ||CURRENT |
 |________|________|________|________|________|________|________|________|________|________|________|________|________|____________||________|
-|        |        |        |        |        |        |        |        |        |        |        |        |        |            ||        |
-|        | 111111 |        |        |        |        |        |        |        |        |        |        |        |            ||        |
+| smac   |        |        |        |        |        |        |        |        |        |        |        |        |            ||        |
+| @app   | 111111 |        |        |        |        |        |        |        |        |        |        |        | DEBUG STOP ||        |
 |________|________|________|________|________|________|________|________|________|________|________|________|________|____________||________|
 |            |        |        |        |        |        |        |        |        |        | EXTRCT |        |        |        ||        |
 |            |        |        |        | RENAME |        |        |        | INLINE |        | PARAM  |        |        |        ||        |
@@ -247,8 +264,8 @@ ________________________________________________________________________________
 */
 
   [2] = LAYOUT(
-    DEBUG_STOP,   PW_APPLE123, PW_APPLE234, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, SAFE_DELETE,     DEBUG_CONTINUE,
-    KC_NO, SC_111111, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,
+    KC_NO,   PW_APPLE123, PW_APPLE234, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, SAFE_DELETE,     DEBUG_CONTINUE,
+    SMACWATTERS, SC_111111, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, DEBUG_STOP,     KC_NO,
         KC_NO, KC_NO, KC_NO, KC_NO, RENAME, KC_NO, KC_NO, KC_NO, INLINE, KC_NO, EXTRACT_PARAM, KC_NO, KC_NO, KC_NO, KC_NO,
           KC_NO, KC_NO, CHANGE_SIGNATURE, KC_NO, EXTRACT_METHOD, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,     KC_NO,
               KC_NO, KC_NO, KC_NO, EXTRACT_CONST, EXTRACT_VAR, KC_NO, KC_NO, MOVE, KC_NO, KC_NO, KC_NO,   KC_NO,  DEBUG_OUT,
