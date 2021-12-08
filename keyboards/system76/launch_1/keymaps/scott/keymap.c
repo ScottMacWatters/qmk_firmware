@@ -30,7 +30,25 @@ enum custom_keycodes {
     PW_APPLE234,
     SC_111111,
     SMACWATTERS,
-    LOCK
+    LOCK,
+
+    /* Navigation and App Shortcuts */
+    MISSION_CONTROL,
+    APP_VIEW,
+    SPACE_RIGHT,
+    SPACE_LEFT,
+
+    SLACK,
+    INTELLIJ,
+    VSCODE,
+    SAFARI,
+    WEBEX,
+    CHROME,
+    
+    /* Emoji */
+    THUMBS_UP,
+    WAVE,
+
 
 
 };
@@ -165,7 +183,80 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING(SS_LGUI(SS_LCTL("q"))); // cmd ctrl q 
         }
         break;
+
+    case MISSION_CONTROL:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LCTL(SS_TAP(X_UP)));
+        }
+        break;
+
+    case APP_VIEW:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LCTL(SS_TAP(X_DOWN)));
+        }
+        break;
+    
+    case SPACE_RIGHT:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LCTL(SS_TAP(X_RIGHT)));
+        }
+        break;
+        
+    case SPACE_LEFT:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LCTL(SS_TAP(X_LEFT)));
+        }
+        break;
+
+    case SLACK:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LGUI(" ") SS_DELAY(500) "slack");
+        }
+        break;
+
+    case INTELLIJ:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LGUI(" ") SS_DELAY(500) "intelliJ");
+        }
+        break;
+
+    case VSCODE:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LGUI(" ") SS_DELAY(500) "Visual Studio Code");
+        }
+        break;
+
+    case SAFARI:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LGUI(" ") SS_DELAY(500) "Safari");
+        }
+        break;
+    
+    case WEBEX:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LGUI(" ") SS_DELAY(500) "Webex");
+        }
+        break;
+        
+    case CHROME:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LGUI(" ") SS_DELAY(500) "Google Chrome");
+        }
+        break;
+
+    case THUMBS_UP:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LGUI(SS_LCTL(" ")) SS_DELAY(500) "Thumbs Up" SS_DELAY(500) SS_TAP(X_DOWN)"\n");
+        }
+        break;
+
+    case WAVE:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LGUI(SS_LCTL(" ")) SS_DELAY(500) "waving hand" SS_DELAY(500) SS_TAP(X_DOWN)"\n");
+        }
+        break;
     }
+
     return true;
 };
 
@@ -188,7 +279,7 @@ ________________________________________________________________________________
   |    CAPS    |   A    |   S    |   D    |   F    |   G    |   H    |   J    |   K    |   L    |   :    |   "    |   ENTER    |   |  END   |
   |____________|________|________|________|________|________|________|________|________|________|________|________|____________|___|________|
   |                |        |        |        |        |        |        |        |   ,    |    .   |   /    |            |        |
-  |     SHIFT      |   Z    |   X    |   C    |   V    |   B    |   N    |   M    |   <    |    >   |   ?    |   SHIFT    |   UP   |
+  |     SHIFT      |   Z    |   X    |   C    |   V    |   B    |   N    |   M    |   <    |    >   |   ?    |     FN     |   UP   |
   |________________|________|________|________|________|________|________|________|________|________|________|____________|________|_________
   |            |        |       |        |                 |                 |        |        |             |   |        |        |        |
   |    CTRL    |  LALT  | FN    | LGUI   |    FN           |      SPACE      | RCTRL  |  RALT  |     FN      |   |  LEFT  |  DOWN  | RIGHT  |
@@ -200,8 +291,8 @@ ________________________________________________________________________________
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,      KC_PGUP,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,  KC_PGDN,
           KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,    KC_ENT,       KC_END,
-          KC_LSFT,     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,    KC_RSFT,    KC_UP,
-          KC_LCTL, KC_LALT, MO(1),   KC_LGUI,     MO(2),           KC_SPC,     KC_RCTL,   KC_RALT,   MO(1),         KC_LEFT, KC_DOWN, KC_RGHT
+          KC_LSFT,     KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,    MO(4),    KC_UP,
+          KC_LCTL, KC_LALT, MO(1),   KC_LGUI,     MO(2),           KC_SPC,     KC_RCTL,   KC_RALT,   MO(3),         KC_LEFT, KC_DOWN, KC_RGHT
   ),
 
     /* Layer 1, function layer
@@ -216,13 +307,13 @@ ________________________________________________________________________________
 |            |   LOCK |        |        |        |        |        |        |        |        |        |        |        |        ||   DOWN |
 |____________|________|________|________|________|________|________|________|________|________|________|________|________|________||________|
   |            |        |        |        |        |        |        |        |        |        |        |        |            |   |        |
-  |            |        |        |        |        |        |  LEFT  |  DOWN  |   UP   | RIGHT  |        |        |            |   |        |
+  |            |        |        |        |        |        |        |        |        |        |        |        |   PLAYPAUS |   |        |
   |____________|________|________|________|________|________|________|________|________|________|________|________|____________|___|________|
   |                |        |        |        |        |        |        |        |        |        |        |            |   VOL  |
-  |                |        |        |        |        |        |        |  MUTE  |        |        |        |            |   UP   |
+  |                |        |        |        |        |        |        |        |        |        |        |            |   UP   |
   |________________|________|________|________|________|________|________|________|________|________|________|____________|________|_________
   |            |        |       |        |                 |                 |        |        |             |   |        |   VOL  |        |
-  |            |        |       |        |                 |      PLAY       |        |        |             |   |  PREV  |  DOWN  | NEXT   |
+  |            |        |       |        |                 |                 |        |        |             |   |  PREV  |  DOWN  | NEXT   |
   |____________|________|_______|________|_________________|_________________|________|________|_____________|   |________|________|________|
 
 * 'RESET' resets the controller and puts the board into firmware flashing mode. If this key is hit accidentally, just unplug the board
@@ -233,52 +324,109 @@ ________________________________________________________________________________
     RESET,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, RGB_TOG, RGB_VAD, RGB_VAI, KC_NO,     KC_BRIU,
         KC_NO, LOCK, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_BRID,
-          KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_NO, KC_NO,    KC_NO,     KC_NO,
-              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_MUTE, KC_NO, KC_NO, KC_NO,   KC_NO,  KC_VOLU,
-          KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,          KC_MPLY,      KC_NO, KC_NO, KC_NO,       KC_HOME,  KC_VOLD, KC_END
+          KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO,    KC_MPLY,     KC_NO,
+              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,  KC_VOLU,
+          KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,          KC_NO,      KC_NO, KC_NO, KC_NO,       KC_HOME,  KC_VOLD, KC_END
   ),
 
 
     /* Layer 2, Macro layer
 __________________________________________________________________________________________________________________________________  ________
-|        |        |        |        |        |        |        |        |        |        |        |        |        |            || DEBUG  |
-|        |  PW123 |  PW234 |        |        |        |        |        |        |        |        |        |        |  SAFE_DEL  ||CURRENT |
+|        |        |        |        |        |        |        |        |        |        |        |        |        |            ||        |
+|        |  PW123 |  PW234 |        |        |        |        |        |        |        |        |        |        |  SAFE_DEL  ||  WAVE  |
 |________|________|________|________|________|________|________|________|________|________|________|________|________|____________||________|
 | smac   |        |        |        |        |        |        |        |        |        |        |        |        |            ||        |
-| @app   | 111111 |        |        |        |        |        |        |        |        |        |        |        | DEBUG STOP ||        |
+| @app   | 111111 |        |        |        |        |        |        |        |        |        |        |        |            ||THUMBSUP|
 |________|________|________|________|________|________|________|________|________|________|________|________|________|____________||________|
 |            |        |        |        |        |        |        |        |        |        | EXTRCT |        |        |        ||        |
 |            |        |        |        | RENAME |        |        |        | INLINE |        | PARAM  |        |        |        ||        |
 |____________|________|________|________|________|________|________|________|________|________|________|________|________|________||________|
   |            |        | CHANGE |        | EXTRCT |        |        |        |        |        |        |        |            |   |        |
-  |            |        | SIGNAT |        | FUNC   |        |        |        |        |        |        |        |            |   |        |
+  |            |        | SIGNAT |        | FUNC   |        | SPACE_L|APP_VIEW|MISS_CON|SPACE_R |        |        |            |   |        |
   |____________|________|________|________|________|________|________|________|________|________|________|________|____________|___|________|
-  |                |        |        | EXTRCT | EXTRCT |        |        |        |        |        |        |            | DEBUG  |
-  |                |        |        | CONST  | VAR    |        |        |  MOVE  |        |        |        |            | OUT    |
+  |                |        |        | EXTRCT | EXTRCT |        |        |        |        |        |        |            |        |
+  |                |        |        | CONST  | VAR    |        |        |  MOVE  |        |        |        |            |        |
   |________________|________|________|________|________|________|________|________|________|________|________|____________|________|_________
-  |            |        |       |        |                 |  DEBUG          |        |        |             |   | DEBUG  | DEBUG  | DEBUG  |
-  |            |        |       |        |                 |  CONTINUE       |        |        |             |   | RUN    | IN     | OVER   |
+  |            |        |       |        |                 |                 |        |        |             |   |        |        |        |
+  |            |        |       |        |                 |                 |        |        |             |   |        |        |        |
   |____________|________|_______|________|_________________|_________________|________|________|_____________|   |________|________|________|
 
 
 */
 
   [2] = LAYOUT(
-    KC_NO,   PW_APPLE123, PW_APPLE234, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, SAFE_DELETE,     DEBUG_CONTINUE,
-    SMACWATTERS, SC_111111, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, DEBUG_STOP,     KC_NO,
+    KC_NO,   PW_APPLE123, PW_APPLE234, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, SAFE_DELETE,     WAVE,
+    SMACWATTERS, SC_111111, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,     THUMBS_UP,
         KC_NO, KC_NO, KC_NO, KC_NO, RENAME, KC_NO, KC_NO, KC_NO, INLINE, KC_NO, EXTRACT_PARAM, KC_NO, KC_NO, KC_NO, KC_NO,
-          KC_NO, KC_NO, CHANGE_SIGNATURE, KC_NO, EXTRACT_METHOD, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,     KC_NO,
-              KC_NO, KC_NO, KC_NO, EXTRACT_CONST, EXTRACT_VAR, KC_NO, KC_NO, MOVE, KC_NO, KC_NO, KC_NO,   KC_NO,  DEBUG_OUT,
-          KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,          DEBUG_CONTINUE,      KC_NO, KC_NO, KC_NO,       DEBUG_RUN,  DEBUG_INTO, DEBUG_OVER
+          KC_NO, KC_NO, CHANGE_SIGNATURE, KC_NO, EXTRACT_METHOD, KC_NO, SPACE_LEFT, APP_VIEW, MISSION_CONTROL, SPACE_RIGHT, KC_NO, KC_NO,    KC_NO,     KC_NO,
+              KC_NO, KC_NO, KC_NO, EXTRACT_CONST, EXTRACT_VAR, KC_NO, KC_NO, MOVE, KC_NO, KC_NO, KC_NO,   KC_NO,  KC_NO,
+          KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,          KC_NO,      KC_NO, KC_NO, KC_NO,       KC_NO,  KC_NO, KC_NO
   ),
 
+    /* Layer 3, Debug Layer
+__________________________________________________________________________________________________________________________________  ________
+|        |        |        |        |        |        |        |        |        |        |        |        |        |            || DEBUG  |
+|        |        |        |        |        |        |        |        |        |        |        |        |        |            ||CURRENT |
+|________|________|________|________|________|________|________|________|________|________|________|________|________|____________||________|
+|        |        |        |        |        |        |        |        |        |        |        |        |        |            ||        |
+|        |        |        |        |        |        |        |        |        |        |        |        |        | DEBUG STOP ||        |
+|________|________|________|________|________|________|________|________|________|________|________|________|________|____________||________|
+|            |        |        |        |        |        |        |        |        |        |        |        |        |        ||        |
+|            |        |        |        |        |        |        |        |        |        |        |        |        |        ||        |
+|____________|________|________|________|________|________|________|________|________|________|________|________|________|________||________|
+  |            |        |        |        |        |        |        |        |        |        |        |        |            |   |        |
+  |            |        |        |        |        |        |        |        |        |        |        |        | DEBUG CONT |   |        |
+  |____________|________|________|________|________|________|________|________|________|________|________|________|____________|___|________|
+  |                |        |        |        |        |        |        |        |        |        |        |            | DEBUG  |
+  |                |        |        |        |        |        |        |        |        |        |        |            | OUT    |
+  |________________|________|________|________|________|________|________|________|________|________|________|____________|________|_________
+  |            |        |       |        |                 |                 |        |        |             |   | DEBUG  | DEBUG  | DEBUG  |
+  |            |        |       |        |                 |                 |        |        |             |   | RUN    | IN     | OVER   |
+  |____________|________|_______|________|_________________|_________________|________|________|_____________|   |________|________|________|
+
+
+*/
+
   [3] = LAYOUT(
-    KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,     KC_TRNS,
-              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,  KC_TRNS,
-          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,          KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS,       KC_TRNS,  KC_TRNS, KC_TRNS
+    KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,     DEBUG_CURRENT,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, DEBUG_STOP,     KC_NO,
+        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+          KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,    DEBUG_CONTINUE,     KC_NO,
+              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,  DEBUG_OUT,
+          KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,          KC_NO,      KC_NO, KC_NO, KC_NO,       DEBUG_RUN,  DEBUG_INTO, DEBUG_OVER
+  ),
+
+    /* Layer 4, App Layer
+__________________________________________________________________________________________________________________________________  ________
+|        |        |        |        |        |        |        |        |        |        |        |        |        |            ||        |
+|        |        |        |        |        |        |        |        |        |        |        |        |        |            ||        |
+|________|________|________|________|________|________|________|________|________|________|________|________|________|____________||________|
+|        |        |        |        |        |        |        |        |        |        |        |        |        |            ||        |
+|        |        |        |        |        |        |        |        |        |        |        |        |        |            ||        |
+|________|________|________|________|________|________|________|________|________|________|________|________|________|____________||________|
+|            |        |        |        |        |        |        |        |        |        |        |        |        |        ||        |
+|            |        |  WEBEX |        |        |        |        |        |        |        |        |        |        |        ||        |
+|____________|________|________|________|________|________|________|________|________|________|________|________|________|________||________|
+  |            |        |        |        |        |        |        |        |        |        |        |        |            |   |        |
+  |            | SAFARI |  SLACK |INTELLIJ|        |        |        |        |        |        |        |        |            |   |        |
+  |____________|________|________|________|________|________|________|________|________|________|________|________|____________|___|________|
+  |                |        |        |        |        |        |        |        |        |        |        |            |        |
+  |                |        |        | CHROME | VSCODE |        |        |        |        |        |        |            |        |
+  |________________|________|________|________|________|________|________|________|________|________|________|____________|________|_________
+  |            |        |       |        |                 |                 |        |        |             |   |        |        |        |
+  |            |        |       |        |                 |                 |        |        |             |   |        |        |        |
+  |____________|________|_______|________|_________________|_________________|________|________|_____________|   |________|________|________|
+
+
+*/
+
+  [4] = LAYOUT(
+    KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,
+        KC_NO, KC_NO, WEBEX, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+          KC_NO, SAFARI, SLACK, INTELLIJ, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,    KC_NO,     KC_NO,
+              KC_NO, KC_NO, KC_NO, CHROME, VSCODE, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,  KC_NO,
+          KC_NO, KC_NO, KC_NO, KC_NO,     KC_NO,          KC_NO,      KC_NO, KC_NO, KC_NO,       KC_NO,  KC_NO, KC_NO
   ),
 };
 
