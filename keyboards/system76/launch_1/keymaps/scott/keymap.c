@@ -210,49 +210,49 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case SLACK:
         if (record->event.pressed) {
-            SEND_STRING(SS_LGUI(" ") SS_DELAY(500) "slack");
+            SEND_STRING(SS_LGUI(" ") SS_DELAY(100) "Slack" );
         }
         break;
 
     case INTELLIJ:
         if (record->event.pressed) {
-            SEND_STRING(SS_LGUI(" ") SS_DELAY(500) "intelliJ");
+            SEND_STRING(SS_LGUI(" ") SS_DELAY(100) "IntelliJ Idea Ultimate");
         }
         break;
 
     case VSCODE:
         if (record->event.pressed) {
-            SEND_STRING(SS_LGUI(" ") SS_DELAY(500) "Visual Studio Code");
+            SEND_STRING(SS_LGUI(" ") SS_DELAY(100) "Visual Studio Code");
         }
         break;
 
     case SAFARI:
         if (record->event.pressed) {
-            SEND_STRING(SS_LGUI(" ") SS_DELAY(500) "Safari");
+            SEND_STRING(SS_LGUI(" ") SS_DELAY(100) "Safari");
         }
         break;
     
     case WEBEX:
         if (record->event.pressed) {
-            SEND_STRING(SS_LGUI(" ") SS_DELAY(500) "Webex");
+            SEND_STRING(SS_LGUI(" ") SS_DELAY(100) "Webex");
         }
         break;
         
     case CHROME:
         if (record->event.pressed) {
-            SEND_STRING(SS_LGUI(" ") SS_DELAY(500) "Google Chrome");
+            SEND_STRING(SS_LGUI(" ") SS_DELAY(100) "Google Chrome");
         }
         break;
 
     case THUMBS_UP:
         if (record->event.pressed) {
-            SEND_STRING(SS_LGUI(SS_LCTL(" ")) SS_DELAY(500) "Thumbs Up" SS_DELAY(500) SS_TAP(X_DOWN)"\n");
+            SEND_STRING(SS_LGUI(SS_LCTL(" ")) SS_DELAY(100) "Thumbs Up" SS_DELAY(500) SS_TAP(X_DOWN));
         }
         break;
 
     case WAVE:
         if (record->event.pressed) {
-            SEND_STRING(SS_LGUI(SS_LCTL(" ")) SS_DELAY(500) "waving hand" SS_DELAY(500) SS_TAP(X_DOWN)"\n");
+            SEND_STRING(SS_LGUI(SS_LCTL(" ")) SS_DELAY(100) "waving hand" SS_DELAY(500) SS_TAP(X_DOWN));
         }
         break;
     }
